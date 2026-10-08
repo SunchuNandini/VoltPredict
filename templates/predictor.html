@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Bill Predictor{% endblock %}
+{% block subtitle %}Enter your expected billing-cycle usage and get a live machine-learning estimate.{% endblock %}
+{% block content %}
+<section class="grid predictor-layout">
+  <div class="panel predictor">
+    <div class="panel-head"><div><h2>Predict your bill</h2><p>Enter the expected values for your next billing cycle.</p></div><span class="badge">ML MODEL</span></div>
+    <form id="predictionForm">
+      <div class="form-grid">
+        <label>Units consumed (kWh)<input name="units_consumed" type="number" min="1" max="5000" step=".1" value="280" required></label>
+        <label>Previous units (kWh)<input name="previous_units" type="number" min="0" max="5000" step=".1" value="250" required></label>
+        <label>Billing days<input name="days_in_bill" type="number" min="1" max="31" value="30" required></label>
+        <label>Occupants<input name="occupants" type="number" min="1" max="20" value="4" required></label>
+        <label>Average temperature (°C)<input name="temperature_avg" type="number" min="0" max="55" step=".1" value="31" required></label>
+        <label>Humidity (%)<input name="humidity_avg" type="number" min="0" max="100" step=".1" value="60" required></label>
+        <label>AC usage / day (hours)<input name="ac_usage_hours" type="number" min="0" max="24" step=".1" value="5" required></label>
+        <label>Fan usage / day (hours)<input name="fan_usage_hours" type="number" min="0" max="24" step=".1" value="8" required></label>
+        <label>Refrigerator / day (hours)<input name="refrigerator_hours" type="number" min="0" max="24" step=".1" value="20" required></label>
+        <label>Washing cycles / month<input name="washing_machine_cycles" type="number" min="0" max="100" step=".1" value="10" required></label>
+        <label>Water heater / day (hours)<input name="water_heater_hours" type="number" min="0" max="24" step=".1" value="2" required></label>
+        <label>Average daily units<input id="avgDailyInput" name="avg_daily_units" type="number" step=".01" value="9.33" readonly></label>
+      </div>
+      <div class="form-note">Average daily units are calculated automatically from units consumed ÷ billing days so the model receives a consistent value.</div>
+      <button class="predict-btn" type="submit">⚡ Predict Electricity Bill</button>
+      <div id="formError" class="form-error" hidden></div>
+    </form>
+  </div>
+
+  <div class="panel result-panel">
+    <span class="eyebrow">PREDICTION RESULT</span>
+    <div class="result-number" id="result">₹ —</div>
+    <div class="confidence">Estimated electricity bill for this billing cycle</div>
+    <div class="result-meta"><span id="resultModel">Random Forest Regression</span><span id="dailyCost">≈ ₹ — / day</span></div>
+    <div class="meter"><span id="meter"></span></div>
+    <div class="compare">
+      <div><span>Current units</span><b id="rUnits">—</b></div>
+      <div><span>Vs previous</span><b id="rChange">—</b></div>
+      <div><span>Average/day</span><b id="rDailyUnits">—</b></div>
+      <div><span>Change in units</span><b id="rUnitChange">—</b></div>
+    </div>
+    <div id="predictionTime" class="prediction-time">Waiting for a prediction.</div>
+    <div class="note">This is an estimate from the trained sample model. Actual tariffs can vary by electricity board, tariff category, taxes and subsidies.</div>
+  </div>
+</section>
+
+<section class="panel recent-panel">
+  <div class="panel-head"><div><h2>Recent predictions</h2><p>This list updates immediately after each successful prediction.</p></div><span class="badge" id="recentCountBadge">0 RUNS</span></div>
+  <div class="table-wrap"><table><thead><tr><th>Time</th><th>Units</th><th>Predicted bill</th><th>Vs previous</th></tr></thead><tbody id="recentTable"><tr><td colspan="4" class="empty-state">No saved predictions yet.</td></tr></tbody></table></div>
+</section>
+{% endblock %}

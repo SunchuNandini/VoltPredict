@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VoltPredict — Electricity Bill Intelligence</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-page="{{ page }}">
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="/">
+      <span class="logo">⚡</span>
+      <span><b>VoltPredict</b><small>Energy Intelligence</small></span>
+    </a>
+    <nav>
+      <a href="/" class="nav-link {% if page == 'dashboard' %}active{% endif %}">Dashboard</a>
+      <a href="/predictor" class="nav-link {% if page == 'predictor' %}active{% endif %}">Bill Predictor</a>
+      <a href="/analytics" class="nav-link {% if page == 'analytics' %}active{% endif %}">Analytics</a>
+      <a href="/tips" class="nav-link {% if page == 'tips' %}active{% endif %}">Saving Tips</a>
+    </nav>
+    <div class="side-card">
+      <span>MODEL STATUS</span>
+      <strong id="modelStatus">● Checking...</strong>
+      <small id="modelName">Random Forest Regression</small>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <span class="eyebrow">DATA SCIENCE PROJECT</span>
+        <h1>{% block title %}Electricity Bill Prediction{% endblock %}</h1>
+        <p>{% block subtitle %}Predict and understand your electricity usage with a trained machine-learning model.{% endblock %}</p>
+      </div>
+      <button class="ghost" id="refreshBtn">↻ Refresh</button>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer>VoltPredict • Educational Data Science Project • Flask + Scikit-learn + Chart.js</footer>
+  </main>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

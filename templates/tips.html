@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Saving Tips{% endblock %}
+{% block subtitle %}Practical suggestions generated from your latest prediction instead of fixed text.{% endblock %}
+{% block content %}
+<section class="panel tips-hero">
+  <div><span class="eyebrow">PERSONALIZED GUIDANCE</span><h2 id="tipsHeadline">Your electricity-saving suggestions</h2><p id="tipsSubtext">Make a prediction and VoltPredict will adapt these recommendations to your latest usage.</p></div>
+  <div class="tips-score"><span>Prediction runs</span><b id="tipsRunCount">0</b></div>
+</section>
+
+<section id="tipsGrid" class="dynamic-tips"><div class="empty-state">Loading tips...</div></section>
+
+<section class="panel latest-tip-data">
+  <div class="panel-head"><div><h2>Latest usage profile</h2><p>Values below are pulled from your most recent prediction.</p></div></div>
+  <div class="profile-grid" id="latestProfile"><div class="empty-state">No prediction available yet.</div></div>
+</section>
+{% endblock %}

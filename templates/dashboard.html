@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Electricity Bill Prediction{% endblock %}
+{% block subtitle %}A live overview of your electricity data, latest prediction and model performance.{% endblock %}
+{% block content %}
+<section class="stats" id="dashboardStats">
+  <div class="stat"><span>Average Bill</span><b id="avgBill">—</b><small>Historical dataset</small></div>
+  <div class="stat"><span>Average Units</span><b id="avgUnits">—</b><small>kWh / billing cycle</small></div>
+  <div class="stat"><span>Latest Prediction</span><b id="latestBill">—</b><small id="latestBillNote">No prediction yet</small></div>
+  <div class="stat"><span>Prediction Runs</span><b id="predictionCount">0</b><small>Saved on this device</small></div>
+</section>
+
+<section class="model-strip">
+  <div><span>MODEL</span><b>Random Forest Regressor</b></div>
+  <div><span>R² SCORE</span><b id="r2">—</b></div>
+  <div><span>MAE</span><b id="mae">—</b></div>
+  <div><span>RMSE</span><b id="rmse">—</b></div>
+</section>
+
+<section class="dashboard-grid">
+  <div class="panel welcome-panel">
+    <div class="panel-head"><div><h2>Live prediction overview</h2><p>The cards below change after every prediction.</p></div><span class="badge">LIVE DATA</span></div>
+    <div class="overview-grid">
+      <div class="overview-item"><span>Latest units</span><strong id="latestUnits">—</strong><small>kWh</small></div>
+      <div class="overview-item"><span>Recent average bill</span><strong id="recentAverage">—</strong><small>Across saved predictions</small></div>
+      <div class="overview-item"><span>Latest change</span><strong id="latestChange">—</strong><small>Compared with previous units</small></div>
+      <div class="overview-item"><span>Prediction trend</span><strong id="predictionTrend">—</strong><small>Compared with previous prediction</small></div>
+    </div>
+    <div class="action-row">
+      <a class="primary-link" href="/predictor">⚡ Make a new prediction</a>
+      <a class="secondary-link" href="/analytics">View analytics →</a>
+    </div>
+  </div>
+
+  <div class="panel recent-mini">
+    <div class="panel-head"><div><h2>Recent predictions</h2><p>Your latest model runs.</p></div></div>
+    <div id="recentMini" class="recent-list"><div class="empty-state">No predictions yet. Open Bill Predictor to start.</div></div>
+  </div>
+</section>
+
+<section class="panel chart-panel">
+  <div class="panel-head"><div><h2>Historical consumption & bill</h2><p>Average values from the training dataset.</p></div></div>
+  <canvas id="historyChart"></canvas>
+</section>
+{% endblock %}

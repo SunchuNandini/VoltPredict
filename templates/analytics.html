@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Analytics{% endblock %}
+{% block subtitle %}Explore historical patterns and how your own recent predictions are changing.{% endblock %}
+{% block content %}
+<section class="stats">
+  <div class="stat"><span>Highest Historical Bill</span><b id="maxBill">—</b><small>Training dataset</small></div>
+  <div class="stat"><span>Lowest Historical Bill</span><b id="minBill">—</b><small>Training dataset</small></div>
+  <div class="stat"><span>Median Historical Bill</span><b id="medianBill">—</b><small>Training dataset</small></div>
+  <div class="stat"><span>Your Predictions</span><b id="analyticsPredictionCount">0</b><small>Saved recent runs</small></div>
+</section>
+
+<section class="chart-grid">
+  <div class="panel chart-card"><div class="panel-head"><div><h2>Historical bill vs units</h2><p>Dataset averages by month.</p></div></div><canvas id="historyChart"></canvas></div>
+  <div class="panel chart-card"><div class="panel-head"><div><h2>Your prediction trend</h2><p>Changes as you create new predictions.</p></div></div><canvas id="predictionChart"></canvas><div id="predictionEmpty" class="empty-overlay" hidden>No predictions yet. Use Bill Predictor first.</div></div>
+  <div class="panel chart-card"><div class="panel-head"><div><h2>Average appliance usage</h2><p>Historical sample profile.</p></div></div><canvas id="applianceChart"></canvas></div>
+  <div class="panel chart-card"><div class="panel-head"><div><h2>Unit consumption distribution</h2><p>Number of historical records in each range.</p></div></div><canvas id="distributionChart"></canvas></div>
+</section>
+
+<section class="panel insights-panel">
+  <div class="panel-head"><div><h2>Latest prediction insight</h2><p>This text changes from the most recent saved prediction.</p></div></div>
+  <div id="latestInsight" class="insight-box">Make a prediction to see a personalized insight here.</div>
+</section>
+{% endblock %}
