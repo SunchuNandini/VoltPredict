@@ -1,0 +1,21 @@
+{
+  "mae": 37.29,
+  "rmse": 48.71,
+  "r2": 0.9954,
+  "train_records": 960,
+  "test_records": 240,
+  "features": [
+    "units_consumed",
+    "avg_daily_units",
+    "days_in_bill",
+    "previous_units",
+    "temperature_avg",
+    "humidity_avg",
+    "ac_usage_hours",
+    "fan_usage_hours",
+    "refrigerator_hours",
+    "washing_machine_cycles",
+    "water_heater_hours",
+    "occupants"
+  ]
+}
